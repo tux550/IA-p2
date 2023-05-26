@@ -15,9 +15,9 @@ print(Y.shape)
 
 print("Testing Models ...")
 models = {
-    #"GMM": GMM(100, 3),
+    "GMM": GMM(100, 3),
     "KMeans": KMeans(10, 3),
-    #"DBScan": DBScan(r=1, min_pts=8, dist="minkowski"),
+    "DBScan": DBScan(r=1, min_pts=8, dist="minkowski"),
 }
 
 for model_name in models:
