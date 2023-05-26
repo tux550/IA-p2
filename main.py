@@ -2,7 +2,7 @@ from load import load_imgs, load_iris
 from models import DBScan, GMM, KMeans
 from misc.plot_dist import plot_dist
 from misc.display import display
-from test.metrics import get_metrics
+from test.metrics import evaluate_clustering, evaluate_prediction
 
 print("Loading Dataset ...")
 #X,Y = load_imgs(img_limit = None, do_minmaxscaler=False, pca_components=None)
@@ -26,5 +26,5 @@ for model_name in models:
   # Model
   print(model_name)
   # Metrics 
-  metrics = get_metrics(m,X,Y)
+  metrics = evaluate_prediction(m,X,Y)
   print("Metrics", metrics)
