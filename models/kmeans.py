@@ -5,9 +5,10 @@ from .base import ClusteringMethod
 class KMeans(ClusteringMethod):
   
 
-  def __init__(self, epochs, n_clusters):
+  def __init__(self, epochs, n_clusters, distance_method=minkowski):
     self.epochs     = epochs
     self.n_clusters = n_clusters
+    self.distance_method = distance_method
 
   def fit(self, X):
     self.init_centroids(X)
@@ -22,7 +23,7 @@ class KMeans(ClusteringMethod):
   def get_groups(self, X):
     groups = []
     for x in X:
-        dist = np.array( [minkowski(c, x) for c in self.centroids])
+        dist = np.array( [self.distance_method(c, x) for c in self.centroids])
         g    = np.argmin( dist )
         groups.append(g)
     groups = np.array(groups)

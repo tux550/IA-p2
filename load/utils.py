@@ -3,15 +3,14 @@ import pywt
 from  skimage.io import imread, imshow
 from config import DATASET_PATH
 
-def img2fv(img_path):
+def img2fv(img_path, depth=1):
   # Load img
   feacture = imread(img_path)
   # Img to feature vector
-  LL1, (LH, HL, HH) = pywt.dwt2(feacture, 'haar')
-  LL2, (LH, HL, HH) = pywt.dwt2(LL1, 'haar')
-  LL3, (LH, HL, HH) = pywt.dwt2(LL2, 'haar')
-  LL4, (LH, HL, HH) = pywt.dwt2(LL3, 'haar')
-  fv = LL4.flatten()
+  LL = feacture
+  for i in range(depth):
+    LL, (LH, HL, HH) = pywt.dwt2(LL, 'haar')
+  fv = LL.flatten()
   # Return
   return fv
 

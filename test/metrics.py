@@ -1,6 +1,7 @@
-from sklearn.metrics import homogeneity_score, completeness_score, v_measure_score
+from sklearn.metrics import homogeneity_score, completeness_score, v_measure_score, adjusted_rand_score
 from scipy.stats import kendalltau
 from scipy.special import kl_div
+from misc.display import display
 
 def evaluate_clustering(model, X):
   # Train & Predict
@@ -32,18 +33,19 @@ def evaluate_prediction(model, X, Y):
   homo = homogeneity_score(Y.reshape(-1), labels)
   comp = completeness_score(Y.reshape(-1), labels)
   vmsr = v_measure_score(Y.reshape(-1), labels)
-
+  rans = adjusted_rand_score(Y.reshape(-1), labels)
   # TODO
   # Matriz de similitud
 
   # Display
-  #  display(X, labels, Y, model_name)
+  #display(X, labels, Y, "name")
 
   # Return
   metrics = {
     "homogeneity_score" : homo,
     "completeness_score": comp, 
-    "v_measure_score"   : vmsr
+    "v_measure_score"   : vmsr,
+    "adjusted_rand_score":rans,
   }
   return metrics
 

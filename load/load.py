@@ -7,7 +7,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.decomposition import PCA
 from sklearn import datasets
 
-def load_imgs(img_limit = None, do_minmaxscaler=False, pca_components=None):
+def load_imgs(img_limit = None, depth=1):
     # Init X, Y dataset
     X = []
     Y = []
@@ -20,21 +20,23 @@ def load_imgs(img_limit = None, do_minmaxscaler=False, pca_components=None):
         imgpath_ls = emotions_dict[emotion]
         for img_name in imgpath_ls:
             img_path = DATASET_PATH + "/"+emotion+"/" + img_name
-            fv = img2fv(img_path)
+            fv = img2fv(img_path, depth=depth)
             X.append(fv)
             Y.append(curr_label)
         curr_label += 1
+    """
     # Scale if True
     if do_minmaxscaler:
         scaler  = MinMaxScaler()
         X = scaler.fit_transform(X)
     # PCA if True
     if pca_components:
-        pca = PCA(n_components=20)
+        pca = PCA(n_components=pca_components)
         X = pca.fit_transform(X)
+    """
     # Dataset to np array
     X = np.array(X)
-    Y = np.array(Y).reshape(-1,1)
+    Y = np.array(Y)
     # Return
     return X,Y
 
