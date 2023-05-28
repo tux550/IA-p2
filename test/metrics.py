@@ -1,59 +1,58 @@
+import numpy as np
+from sklearn.metrics import silhouette_score, calinski_harabasz_score, davies_bouldin_score
 from sklearn.metrics import homogeneity_score, completeness_score, v_measure_score, adjusted_rand_score
-from scipy.stats import kendalltau
-from scipy.special import kl_div
 from misc.display import display
 
 def evaluate_clustering(model, X):
   # Train & Predict
   labels = model.fit(X)
-
-  # Metrics 
-  # TODO
-  # Kendall Tau
-  # KL div
-  pass
-
-def evaluate_clustes(model, X):
-  # Train & Predict
-  labels = model.fit(X)
-
-  # Metrics 
-  # TODO
-  # Single linkeage
-  # Complete linkage
-  # Centrod Method
-  # Average linkage
-  pass
+  #print("labels",labels)
+  # Metrics
+  if len(np.unique(labels))>1:
+    shsc = silhouette_score(X,labels)
+    chsc = calinski_harabasz_score(X, labels)
+    dbsc = davies_bouldin_score(X, labels)
+  else:
+    shsc = None
+    chsc = None
+    dbsc = None
+  # Return
+  metrics = {
+    "Silhouette Coefficient" : shsc,
+    "Calinski-Harabasz Index": chsc, 
+    "Davies-Bouldin Index"   : dbsc,
+  }
+  return metrics
 
 def evaluate_prediction(model, X, Y):
   # Train & Predict
   labels = model.fit(X)
 
-  # Metrics 
-  homo = homogeneity_score(Y.reshape(-1), labels)
-  comp = completeness_score(Y.reshape(-1), labels)
-  vmsr = v_measure_score(Y.reshape(-1), labels)
-  rans = adjusted_rand_score(Y.reshape(-1), labels)
-  # TODO
-  # Matriz de similitud
+  #print("labels",labels)
 
-  # Display
-  #display(X, labels, Y, "name")
+  # Metrics 
+  if len(np.unique(labels))>1:
+    homo = homogeneity_score(Y.reshape(-1), labels)
+    comp = completeness_score(Y.reshape(-1), labels)
+    vmsr = v_measure_score(Y.reshape(-1), labels)
+    rans = adjusted_rand_score(Y.reshape(-1), labels)
+  else:
+    shsc = None
+    chsc = None
+    dbsc = None
 
   # Return
   metrics = {
-    "homogeneity_score" : homo,
-    "completeness_score": comp, 
-    "v_measure_score"   : vmsr,
-    "adjusted_rand_score":rans,
+    "Homogenity "        : homo,
+    "Completness"        : comp, 
+    "V-measure"          : vmsr,
+    "Adjusted Rand Index": rans,
   }
   return metrics
 
-# Extra TODO
-# Cohesion
-# Modularidad
-# Silohutte value
-# Pureza del cluster
-# Entropia
-# Tabla de contingencia
-# ...
+
+
+# TODO: Extra
+# Matriz de similitud
+# Display
+
