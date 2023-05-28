@@ -7,6 +7,7 @@ from test.metrics import evaluate_clustering, evaluate_prediction
 
 from scipy.spatial.distance import minkowski, cityblock, chebyshev
 
+
 ############################################################
 #
 #                      Random Seed
