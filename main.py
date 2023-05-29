@@ -36,6 +36,6 @@ print("Y Shape:",Y.shape)
 
 # Test Models
 print("Testing Models ...")
-test_all(X,seed=42)
+#test_all(X,seed=42)
 test_compare(X,Y,seed=42)
 exit()

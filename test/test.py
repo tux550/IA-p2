@@ -35,6 +35,6 @@ def test_compare(X,Y, seed=42):
     models = [
         KMeans(100,16),
         GMM(100,16),
-        DBScan(0.75,3,"minkowski"),
+        DBScan(1,3,"minkowski"),
     ]
     compare_models(X,Y, models, seed=seed)
