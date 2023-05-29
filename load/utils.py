@@ -1,5 +1,6 @@
 import os
 import pywt
+import numpy as np
 from  skimage.io import imread, imshow
 from config import DATASET_PATH
 
@@ -10,6 +11,7 @@ def img2fv(img_path, depth=1):
   LL = feacture
   for i in range(depth):
     LL, (LH, HL, HH) = pywt.dwt2(LL, 'haar')
+  #fv = LL.flatten()
   fv = LL.flatten()
   # Return
   return fv

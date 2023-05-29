@@ -9,6 +9,8 @@ class KMeans(ClusteringMethod):
     self.epochs     = epochs
     self.n_clusters = n_clusters
     self.distance_method = distance_method
+    # Extra
+    self.reuse = False
 
   def fit(self, X):
     self.init_centroids(X)
@@ -34,8 +36,15 @@ class KMeans(ClusteringMethod):
     new_c = []
     for c in range(self.n_clusters):
         elements = X[grupos == c]
-        new_c.append(np.mean(elements, axis = 0))
+        if len(elements) > 0:
+          new_c.append(np.mean(elements, axis = 0))
+        else:
+          if not self.reuse:
+            print("REUSE")
+            self.reuse=True
+          new_c.append(self.centroids[c])
     new_c = np.array(new_c)
+
     return new_c
 
   def init_centroids(self, X):
