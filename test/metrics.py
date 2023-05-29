@@ -48,7 +48,7 @@ def evaluate_prediction(model, X, Y):
     "V-measure"          : vmsr,
     "Adjusted Rand Index": rans,
   }
-  return metrics
+  return metrics, labels
 
 
 

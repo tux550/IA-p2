@@ -38,7 +38,7 @@ def load_imgs(img_limit = None, depth=1):
     X = np.array(X)
     Y = np.array(Y)
     # Return
-    return X,Y
+    return X,Y,["Unassigned"]+list(emotions_dict.keys())
 
 def load_iris():
     iris = datasets.load_iris()

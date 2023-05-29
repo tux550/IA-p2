@@ -4,7 +4,7 @@ from models import DBScan, GMM, KMeans
 from misc.plot_dist import plot_dist
 from misc.display import display
 from test.test import test_all, test_compare
-
+from visualize.visualize import visualize_clusters, visualize_models
 
 ###
 # BEST CONFIG:
@@ -26,7 +26,7 @@ np.random.seed(42)
 
 # Load dataset
 print("Loading Dataset ...")
-X,Y            = load_imgs(depth=depth)
+X,Y, tagnames = load_imgs(depth=depth)
 
 # Transform dataset
 fv_transformer = generate_transformer(X, do_minmaxscaler=True, pca_components=pca_components)
@@ -37,5 +37,6 @@ print("Y Shape:",Y.shape)
 # Test Models
 print("Testing Models ...")
 test_all(X,seed=42)
-test_compare(X,Y,seed=42)
+labels_dict = test_compare(X,Y,seed=42)
+visualize_models(X, Y, tagnames,labels_dict)
 exit()

@@ -37,4 +37,4 @@ def test_compare(X,Y, seed=42):
         GMM(100,32),
         DBScan(1,3,"minkowski"),
     ]
-    compare_models(X,Y, models, seed=seed)
+    return compare_models(X,Y, models, seed=seed)
