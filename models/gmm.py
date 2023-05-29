@@ -42,7 +42,12 @@ class GMM(ClusteringMethod):
       for i in range(k):
         #print("ui", self.u[i])
         #print("sigmai", self.sigma[i])
+        #try:
         mnorm = stats.multivariate_normal(self.u[i], self.sigma[i],  allow_singular=True) # TEST
+        #except:
+        #  print("u", np.isnan(self.u[i]).any())
+        #  print("sigma", np.isnan(self.sigma[i]).any())
+        #  exit()
         for j in range(n):
           LL[j][i] = mnorm.pdf(X[j])
       # Multiply by p

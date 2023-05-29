@@ -20,5 +20,6 @@ def compare_models(X, Y, models, seed=42):
 
   result_dict = dict()
   for m in models:
+    print(f"> modek: {m.__class__.__name__}")
     result_dict[m.__class__.__name__] = evaluate_prediction(m,X, Y)
   table_results("Compare models", "models", result_dict, format_title=False)
