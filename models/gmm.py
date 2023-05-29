@@ -36,6 +36,8 @@ class GMM(ClusteringMethod):
     k = len(self.pi)
 
     for e in range(self.epochs):
+      if (e%20 == 0):
+        print(f">> epoch: {e}")
       # E-step:
       ## Calc Likelihood
       LL = np.zeros([n,k]) # (n*k)

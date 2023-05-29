@@ -6,7 +6,7 @@ def test_kmeans(X, seed=42):
     # Test NClusters
     init_dict  = {"epochs":100}
     param_name = "n_clusters"
-    param_ls   = [2,4,8,16,32,64] #[2,4,8,16,32,64,128] #[2,3,4,5,6,7,8,9,10]
+    param_ls   = [2,4,8,16,32,64,128] #[2,4,8,16,32,64,128] #[2,3,4,5,6,7,8,9,10]
     model = KMeans
     test_parameter(X, model, param_name, param_ls, init_dict,seed=seed)
 
@@ -14,7 +14,7 @@ def test_gmm(X, seed=42):
     # Test NClusters
     init_dict  = {"epochs":100}
     param_name = "n_clusters"
-    param_ls   = [2,4,8,16,32,64] #[2,3,4,5,6,7,8,9,10]
+    param_ls   = [2,4,8,16,32,64,128] #[2,3,4,5,6,7,8,9,10]
     model = GMM
     test_parameter(X, model, param_name, param_ls, init_dict,seed=seed)
 
@@ -27,14 +27,14 @@ def test_dbscan(X, seed=42):
     test_parameter(X, model, param_name, param_ls, init_dict,seed=seed)
 
 def test_all(X, seed=42):
-    test_kmeans(X, seed=seed)
     test_gmm(X, seed=seed)
+    test_kmeans(X, seed=seed)
     test_dbscan(X, seed=seed)
 
 def test_compare(X,Y, seed=42):
     models = [
-        KMeans(100,16),
-        GMM(100,16),
+        KMeans(100,32),
+        GMM(100,32),
         DBScan(1,3,"minkowski"),
     ]
     compare_models(X,Y, models, seed=seed)

@@ -16,6 +16,8 @@ class KMeans(ClusteringMethod):
     self.init_centroids(X)
     grupos = None
     for e in range(self.epochs):
+        if (e%20 == 0):
+          print(f">> epoch: {e}")
         grupos = self.get_groups(X)
         new_c = self.new_centroids(X, grupos)
         #diff = np.array(self.centroids) - np.array(new_c)
