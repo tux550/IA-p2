@@ -5,9 +5,18 @@ from misc.plot_dist import plot_dist
 from misc.display import display
 from test.test import test_all, test_compare
 
+
+###
+# BEST CONFIG:
+# Depth: 1
+# PCA: 10
+# KMeans(100,16),
+# GMM(100,16),
+# DBScan(0.75,3,"minkowski"),
+
 # Config
-depth = 1#1, 3
-pca_components=3#20, 2
+depth = 1#1
+pca_components= 10#3
 
 # Set print options
 np.set_printoptions(precision = 5, floatmode="fixed", suppress = True)
@@ -27,6 +36,6 @@ print("Y Shape:",Y.shape)
 
 # Test Models
 print("Testing Models ...")
-#test_all(X,seed=42)
+test_all(X,seed=42)
 test_compare(X,Y,seed=42)
 exit()

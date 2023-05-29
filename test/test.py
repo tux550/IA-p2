@@ -33,14 +33,8 @@ def test_all(X, seed=42):
 
 def test_compare(X,Y, seed=42):
     models = [
-        #d:1,pca:3
         KMeans(100,16),
         GMM(100,16),
         DBScan(0.75,3,"minkowski"),
-        
-        #d:3,pca:2
-        #KMeans(100,8),
-        #GMM(100,16),
-        #DBScan(0.5,3,"minkowski"),
     ]
     compare_models(X,Y, models, seed=seed)
