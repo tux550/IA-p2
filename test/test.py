@@ -25,6 +25,12 @@ def test_dbscan(X, seed=42):
     param_ls   = [0.25,0.5,0.75,1,1.25,1.5,1.75,2,2.25,2.5]
     model = DBScan
     test_parameter(X, model, param_name, param_ls, init_dict,seed=seed)
+    # Test min_pts
+    init_dict  = {"r":1, "min_pts":3, "dist":"minkowski"}
+    param_name = "min_pts"
+    param_ls   = [3,4,5,6,7,8,9,10,11,12,13,14,15]
+    model = DBScan
+    test_parameter(X, model, param_name, param_ls, init_dict,seed=seed)
 
 def test_all(X, seed=42):
     test_gmm(X, seed=seed)
@@ -33,8 +39,8 @@ def test_all(X, seed=42):
 
 def test_compare(X,Y, seed=42):
     models = [
+        DBScan(1,3,"minkowski"),
         KMeans(100,32),
         GMM(100,32),
-        DBScan(1,3,"minkowski"),
     ]
     return compare_models(X,Y, models, seed=seed)

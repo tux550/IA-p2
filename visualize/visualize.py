@@ -23,6 +23,20 @@ def table_tagcount(models_tagcount, tagnames):
     console.print(table)
     console.save_svg("fig/tags_all_models.svg")
 
+def visualize_real(X,Y):
+    # PCA to 2D
+    pca = PCA(n_components=2)
+    Xt = pca.fit_transform(X)
+    # Get clusters
+    n_tags     = len(np.unique(Y))
+    cmap = get_cmap(n_tags)
+    plt.clf()
+    plt.scatter(Xt.T[0], Xt.T[1], color=[cmap(i) for i in Y])
+    plt.title(f"Real Cluster")
+    plt.savefig(f"fig/visualize_real.png")
+    #plt.show()
+
+
 def visualize_clusters(X, Y,tagnames, labels, model_name):
     # PCA to 2D
     pca = PCA(n_components=2)
@@ -55,6 +69,8 @@ def visualize_clusters(X, Y,tagnames, labels, model_name):
     return emotions_count
 
 def visualize_models(X, Y, tagnames, model_labels):
+    # Visualize real
+    visualize_real(X,Y)
     # Visualize clusters
     models_tagcount = dict()
     for model_name in model_labels:

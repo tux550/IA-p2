@@ -25,7 +25,7 @@ fig, subplt_ls_ls = plt.subplots(len(depth_ls), len(components_ls))
 
 
 for depth, subplt_ls in zip(depth_ls, subplt_ls_ls):
-    X,Y = load_imgs(depth=depth)
+    X,Y,_ = load_imgs(depth=depth)
     for components, subplt in zip(components_ls,  subplt_ls):
         print(f"Running d:{depth} c:{components}")
         if components is None:

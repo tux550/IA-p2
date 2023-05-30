@@ -1,12 +1,15 @@
 import numpy as np
-from sklearn.cluster import KMeans
+from .kmeans import KMeans as OwnKMeans
+from sklearn.cluster import KMeans as LibKMeans
 from scipy import stats
 from .base import ClusteringMethod
 
 class GMM(ClusteringMethod):
-  def __init__(self, epochs, n_clusters):
+  def __init__(self, epochs, n_clusters, kmeans_epochs=100, init_method="lib"):
     self.epochs     = epochs
     self.n_clusters = n_clusters
+    self.kmeans_epochs = kmeans_epochs
+    self.init_method = init_method
 
   def fit(self, X):
     self.init_gaussian(X)
@@ -15,9 +18,16 @@ class GMM(ClusteringMethod):
 
   def init_gaussian(self, X):
     # Get u from KMeans
-    kmeans = KMeans(n_clusters=self.n_clusters,n_init="auto").fit(X)
-    labels = kmeans.labels_
-    u      = kmeans.cluster_centers_
+    if self.init_method=="own":
+      # Own kmeans
+      kmeans = OwnKMeans(self.kmeans_epochs, self.n_clusters)
+      labels = kmeans.fit(X)
+      u      = kmeans.centroids
+    # Library kmeans
+    elif self.init_method=="lib":
+      kmeans = LibKMeans(n_clusters=self.n_clusters,n_init="auto").fit(X)
+      labels = kmeans.labels_
+      u      = kmeans.cluster_centers_
     # Get sigma from covariance KMeans
     sigma = []
     for i in range(self.n_clusters):
