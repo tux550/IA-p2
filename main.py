@@ -6,6 +6,11 @@ from misc.display import display
 from test.test import test_all, test_compare
 from visualize.visualize import visualize_clusters, visualize_models
 
+### Integrantes:
+# Salazar Alva, Rodrigo Gabriel (100 %)
+# Nicho Galagarza, Jorge Ernesto (100 %)
+# Loayza Pretel, Gabriel Luis Dario (100 %)
+
 ###
 # BEST CONFIG:
 # Depth: 1
